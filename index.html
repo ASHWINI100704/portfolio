@@ -1,0 +1,800 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ASHWINI P - Futuristic Portfolio</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: radial-gradient(ellipse at 60% 40%, #1a0033 0%, #0a0a23 60%, #000010 100%);
+            color: #ffffff;
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+            min-height: 100vh;
+        }
+
+        /* Deep Galaxy Background */
+        .galaxy-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: -3;
+            background: radial-gradient(ellipse at 60% 40%, #2a0055 0%, #0a0a23 60%, #000010 100%);
+            overflow: hidden;
+        }
+
+        /* Stardust Trails */
+        .stardust {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            pointer-events: none;
+            z-index: -2;
+        }
+        .stardust-dot {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: linear-gradient(90deg, #fff, #00f0ff, #ff00ff);
+            border-radius: 50%;
+            opacity: 0.7;
+            animation: stardust-move 8s linear infinite;
+        }
+        @keyframes stardust-move {
+            0% { transform: translateY(0) scale(1); opacity: 0.7; }
+            80% { opacity: 1; }
+            100% { transform: translateY(100vh) scale(0.7); opacity: 0; }
+        }
+
+        /* Glowing Planets */
+        .planet {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(0.5px) brightness(1.2);
+            z-index: -1;
+        }
+        .planet1 {
+            width: 120px; height: 120px;
+            top: 10vh; left: 8vw;
+            background: radial-gradient(circle at 30% 30%, #00f0ff 0%, #0a0a23 80%);
+            box-shadow: 0 0 60px 20px #00f0ff99;
+            animation: planet-orbit1 18s linear infinite;
+        }
+        .planet2 {
+            width: 80px; height: 80px;
+            bottom: 12vh; right: 10vw;
+            background: radial-gradient(circle at 70% 70%, #ff00ff 0%, #0a0a23 80%);
+            box-shadow: 0 0 40px 10px #ff00ff99;
+            animation: planet-orbit2 24s linear infinite;
+        }
+        .planet3 {
+            width: 60px; height: 60px;
+            top: 60vh; left: 80vw;
+            background: radial-gradient(circle at 50% 50%, #ffe066 0%, #0a0a23 80%);
+            box-shadow: 0 0 30px 8px #ffe06699;
+            animation: planet-orbit3 30s linear infinite;
+        }
+        @keyframes planet-orbit1 {
+            0% { transform: rotate(0deg) translateX(0); }
+            100% { transform: rotate(360deg) translateX(20px); }
+        }
+        @keyframes planet-orbit2 {
+            0% { transform: rotate(0deg) translateY(0); }
+            100% { transform: rotate(360deg) translateY(30px); }
+        }
+        @keyframes planet-orbit3 {
+            0% { transform: rotate(0deg) translateX(0); }
+            100% { transform: rotate(360deg) translateX(-15px); }
+        }
+
+        /* Orbiting UI Elements */
+        .orbiting {
+            position: relative;
+            display: inline-block;
+            animation: orbit-ui 8s linear infinite;
+        }
+        @keyframes orbit-ui {
+            0% { transform: rotate(0deg) translateX(0); }
+            100% { transform: rotate(360deg) translateX(10px); }
+        }
+
+        /* Section and Card Glassmorphism (unchanged) */
+        .glass-card {
+            background: rgba(20,30,50,0.45);
+            border-radius: 1.2rem;
+            padding: 2rem 1.5rem;
+            box-shadow: 0 4px 32px #00ffff33, 0 1.5px 24px #8a2be233;
+            border: 1.5px solid rgba(0,255,255,0.18);
+            backdrop-filter: blur(14px);
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 20px 50px;
+            background: rgba(10, 10, 10, 0.8);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: #00ffff;
+            text-shadow: 0 0 20px #00ffff;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+
+        .nav-links a {
+            color: #ffffff;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: #00ffff;
+            text-shadow: 0 0 10px #00ffff;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, #00ffff, #8a2be2);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            position: relative;
+        }
+
+        .hero-content {
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            margin-bottom: 20px;
+            background: linear-gradient(45deg, #00ffff, #8a2be2, #ff00ff);
+            background-size: 300% 300%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: gradientShift 3s ease-in-out infinite;
+        }
+
+        @keyframes gradientShift {
+            0%,
+            100% {
+                background-position: 0% 50%;
+            }
+
+            50% {
+                background-position: 100% 50%;
+            }
+        }
+
+        .typing-effect {
+            font-size: 1.5rem;
+            color: #00ffff;
+            margin-bottom: 40px;
+            min-height: 60px;
+        }
+
+        /* Profile Image */
+        .profile-image {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            background: linear-gradient(45deg, #00ffff, #8a2be2);
+            padding: 5px;
+            margin-bottom: 30px;
+            animation: pulse 2s infinite;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .profile-image img {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        @keyframes pulse {
+            0%,
+            100% {
+                box-shadow: 0 0 20px rgba(0, 255, 255, 0.5);
+            }
+
+            50% {
+                box-shadow: 0 0 40px rgba(138, 43, 226, 0.8);
+            }
+        }
+
+        /* Sections */
+        .section {
+            min-height: 100vh;
+            padding: 100px 50px;
+            position: relative;
+        }
+
+        .section-title {
+            font-size: 3rem;
+            text-align: center;
+            margin-bottom: 50px;
+            color: #00ffff;
+            text-shadow: 0 0 20px #00ffff;
+        }
+
+        /* About Section */
+        .about-layout {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: flex-start;
+            gap: 40px;
+            background: rgba(0,0,0,0.7);
+            border-radius: 1rem;
+            padding: 2rem;
+            max-width: 900px;
+            margin: 0 auto 2rem auto;
+            box-shadow: 0 4px 32px rgba(0,255,255,0.08);
+        }
+
+        .about-layout div {
+            flex: 1 1 220px;
+            min-width: 220px;
+            max-width: 260px;
+            text-align: center;
+        }
+
+        .about-layout img {
+            width: 140px;
+            height: 140px;
+            border-radius: 50%;
+            border: 3px solid #00ffff;
+            margin-bottom: 1rem;
+            box-shadow: 0 0 24px #00ffff55;
+        }
+
+        .about-layout div h4 {
+            color: #00ffff;
+            margin-bottom: 0.5rem;
+        }
+
+        .about-layout div p {
+            color: #fff;
+            margin-bottom: 0.3rem;
+        }
+
+        /* Projects Section */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .project-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(0, 255, 255, 0.3);
+            border-radius: 15px;
+            padding: 30px;
+            text-align: center;
+            transform: translateY(20px);
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .project-card:hover {
+            transform: translateY(-10px) rotateY(5deg);
+            box-shadow: 0 20px 40px rgba(0, 255, 255, 0.2);
+            border-color: #00ffff;
+        }
+
+        .project-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, transparent, rgba(0, 255, 255, 0.1), transparent);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .project-card:hover::before {
+            opacity: 1;
+        }
+
+        .project-icon {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            color: #8a2be2;
+        }
+
+        .project-title {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: #00ffff;
+        }
+
+        .project-description {
+            color: #cccccc;
+            margin-bottom: 20px;
+        }
+
+        .project-tech {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .tech-tag {
+            background: rgba(138, 43, 226, 0.3);
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            border: 1px solid #8a2be2;
+        }
+
+        /* Skills Section */
+        .skills-container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .skill-category {
+            margin-bottom: 40px;
+        }
+
+        .skill-category h3 {
+            color: #00ffff;
+            margin-bottom: 20px;
+            font-size: 1.5rem;
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+        }
+
+        .skill-item {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            border: 1px solid rgba(0, 255, 255, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .skill-item:hover {
+            border-color: #00ffff;
+            box-shadow: 0 5px 20px rgba(0, 255, 255, 0.2);
+        }
+
+        .skill-icon {
+            font-size: 2rem;
+            margin-bottom: 10px;
+            color: #8a2be2;
+        }
+
+        /* Contact Section */
+        .contact-container {
+            max-width: 600px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .contact-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .contact-item {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 30px;
+            border-radius: 15px;
+            border: 1px solid rgba(0, 255, 255, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .contact-item:hover {
+            border-color: #00ffff;
+            box-shadow: 0 10px 30px rgba(0, 255, 255, 0.2);
+        }
+
+        .contact-icon {
+            font-size: 2rem;
+            margin-bottom: 15px;
+            color: #00ffff;
+        }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            background: rgba(10, 10, 10, 0.95);
+            padding: 40px;
+            border-radius: 20px;
+            border: 2px solid #00ffff;
+            max-width: 600px;
+            max-height: 80vh;
+            overflow-y: auto;
+            position: relative;
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            font-size: 2rem;
+            color: #00ffff;
+            cursor: pointer;
+            background: none;
+            border: none;
+        }
+
+        /* Aurora Mode */
+        .aurora-mode {
+            background: radial-gradient(ellipse at center, #001122 0%, #003366 50%, #004488 100%);
+        }
+
+        .aurora-mode .stars {
+            opacity: 0.3;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .typing-effect {
+                font-size: 1.2rem;
+            }
+
+            .section {
+                padding: 80px 20px;
+            }
+
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: rgba(0, 0, 0, 0.2);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(45deg, #00ffff, #8a2be2);
+            border-radius: 10px;
+        }
+
+        /* Education Roadmap Card Hover (like project pop) */
+        .roadmap-step .glass-card {
+            transition: all 0.3s cubic-bezier(.4,2,.6,1);
+        }
+        .roadmap-step .glass-card:hover {
+            transform: translateY(-10px) scale(1.04) rotateY(5deg);
+            box-shadow: 0 20px 40px rgba(0,255,255,0.25);
+            border-color: #00ffff;
+            z-index: 2;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Galaxy Background -->
+    <div class="galaxy-bg"></div>
+    <div class="stardust" id="stardust"></div>
+    <div class="planet planet1"></div>
+    <div class="planet planet2"></div>
+    <div class="planet planet3"></div>
+
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-container">
+            <div class="logo">Ashwini P</div>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+       
+        </div>
+    </nav>
+
+    <!-- Sound Toggle -->
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <div class="profile-image">
+                <img src="Ash.jpg"
+                    alt="Profile">
+            </div>
+            <h1>Ashwini P</h1>
+            <div class="typing-effect" id="typewriter"></div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="section" id="about">
+        <h2 class="section-title">About Me</h2>
+        <div class="about-content" style="max-width: 500px; margin: 0 auto; text-align: center; font-size: 1.15rem; line-height: 1.8; background: rgba(20,30,50,0.45); border-radius: 1.5rem; padding: 2.5rem 2rem; box-shadow: 0 8px 40px 0 #00ffff44, 0 1.5px 24px 0 #8a2be244; backdrop-filter: blur(18px); border: 1.5px solid rgba(0,255,255,0.18); position: relative; overflow: hidden;">
+            <div style="position: absolute; top: -40px; left: -40px; width: 180px; height: 180px; background: radial-gradient(circle at 30% 30%, #00ffff55 0%, transparent 80%); filter: blur(18px); z-index: 0;"></div>
+            <div style="position: absolute; bottom: -40px; right: -40px; width: 180px; height: 180px; background: radial-gradient(circle at 70% 70%, #8a2be255 0%, transparent 80%); filter: blur(18px); z-index: 0;"></div>
+            <div style="position: relative; z-index: 1;">
+                <div style="font-size: 2rem; color: #00ffff; font-weight: bold; margin-bottom: 0.5rem; letter-spacing: 1px;">Ashwini P</div>
+                <div style="font-size: 1.1rem; color: #fff; margin-bottom: 0.3rem;">Chennai</div>
+                <div style="font-size: 1rem; color: #aad; margin-bottom: 0.3rem;">ashwiniprasad100704@gmail.com</div>
+                <div style="font-size: 1rem; color: #aad; margin-bottom: 0.3rem;">9344182161</div>
+                <div style="font-size: 1rem; color: #aad; margin-bottom: 1.2rem;">linkedin: <a href="https://www.linkedin.com/in/ashwiniprasad10/" target="_blank" style="color:#00ffff; text-decoration:underline;">@ashwiniprasad10</a></div>
+                <p style="margin-bottom: 0; color: #fff; font-size: 1.08rem; background: linear-gradient(90deg, #00ffff33 0%, #8a2be233 100%); border-radius: 0.7rem; padding: 1.1rem 1.2rem; box-shadow: 0 2px 16px #00ffff22;">A driven innovator focused on developing solutions that benefit society and create a lasting impact. Enthusiastic about tackling real-world problems with practical and meaningful results. Open to collaboration and eager to bring groundbreaking ideas to fruition.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Education Section (Roadmap/Timeline) -->
+    <section class="section" id="education">
+        <h2 class="section-title">Education</h2>
+        <div class="roadmap-container" style="max-width: 700px; margin: 0 auto; position: relative;">
+            <div class="roadmap-timeline" style="position: absolute; left: 30px; top: 0; bottom: 0; width: 4px; background: linear-gradient(180deg, #00ffff 0%, #8a2be2 100%); border-radius: 2px;"></div>
+            <div class="roadmap-step" style="position: relative; margin-left: 70px; margin-bottom: 2.5rem;">
+                <div style="position: absolute; left: -55px; top: 0; width: 28px; height: 28px; background: linear-gradient(135deg, #00ffff 60%, #8a2be2 100%); border-radius: 50%; box-shadow: 0 0 16px #00ffff99;"></div>
+                <div class="glass-card" style="background: rgba(20,30,50,0.45); border-radius: 1.2rem; padding: 1.2rem 1.5rem; box-shadow: 0 4px 32px #00ffff33, 0 1.5px 24px #8a2be233; border: 1.5px solid rgba(0,255,255,0.18); backdrop-filter: blur(14px);">
+                    <b>R.M.D Engineering College:</b> Bachelor of Engineering<br>CGPA: 8.51 till 6th sem
+                </div>
+            </div>
+            <div class="roadmap-step" style="position: relative; margin-left: 70px; margin-bottom: 2.5rem;">
+                <div style="position: absolute; left: -55px; top: 0; width: 28px; height: 28px; background: linear-gradient(135deg, #00ffff 60%, #8a2be2 100%); border-radius: 50%; box-shadow: 0 0 16px #00ffff99;"></div>
+                <div class="glass-card" style="background: rgba(20,30,50,0.45); border-radius: 1.2rem; padding: 1.2rem 1.5rem; box-shadow: 0 4px 32px #00ffff33, 0 1.5px 24px #8a2be233; border: 1.5px solid rgba(0,255,255,0.18); backdrop-filter: blur(14px);">
+                    <b>Nalli Kuppuswami Vivekananda Vidhyalaya Junior College (CBSE):</b> Higher Secondary: 81.6
+                </div>
+            </div>
+            <div class="roadmap-step" style="position: relative; margin-left: 70px;">
+                <div style="position: absolute; left: -55px; top: 0; width: 28px; height: 28px; background: linear-gradient(135deg, #00ffff 60%, #8a2be2 100%); border-radius: 50%; box-shadow: 0 0 16px #00ffff99;"></div>
+                <div class="glass-card" style="background: rgba(20,30,50,0.45); border-radius: 1.2rem; padding: 1.2rem 1.5rem; box-shadow: 0 4px 32px #00ffff33, 0 1.5px 24px #8a2be233; border: 1.5px solid rgba(0,255,255,0.18); backdrop-filter: blur(14px);">
+                    <b>Nalli Kuppuswami Vivekananda Vidhyalaya Junior College (CBSE):</b> Secondary School: 85.6
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Achievements & Internships as Card Grid -->
+    <section class="section" id="achievements-internships">
+        <div style="display: flex; flex-wrap: wrap; gap: 2.5rem; justify-content: center; align-items: flex-start;">
+            <!-- Achievements -->
+            <div style="flex: 1 1 340px; min-width: 300px; max-width: 500px;">
+                <h2 class="section-title" style="font-size:2rem; margin-bottom:1.2rem;">Achievements</h2>
+                <div class="projects-grid" style="gap: 1.5rem;">
+                    <div class="project-card" style="background: rgba(20,30,50,0.45); border-radius: 1.2rem; box-shadow: 0 4px 32px #00ffff33, 0 1.5px 24px #8a2be233; border: 1.5px solid rgba(0,255,255,0.18); backdrop-filter: blur(14px);">
+                        <div class="project-title" style="color:#00ffff; font-size:1.15rem; margin-bottom:0.7rem;">DESIGNATHON 2.0</div>
+                        <div class="project-description" style="color:#fff;">2023: RMD Engineering College - Won 1st Place</div>
+                    </div>
+                    <div class="project-card" style="background: rgba(20,30,50,0.45); border-radius: 1.2rem; box-shadow: 0 4px 32px #00ffff33, 0 1.5px 24px #8a2be233; border: 1.5px solid rgba(0,255,255,0.18); backdrop-filter: blur(14px);">
+                        <div class="project-title" style="color:#00ffff; font-size:1.15rem; margin-bottom:0.7rem;">IICS.0-PHASE 4 PROJECT EXHIBITION</div>
+                        <div class="project-description" style="color:#fff;">2023: RMD Engineering College - Won 3rd Place</div>
+                    </div>
+                    <div class="project-card" style="background: rgba(20,30,50,0.45); border-radius: 1.2rem; box-shadow: 0 4px 32px #00ffff33, 0 1.5px 24px #8a2be233; border: 1.5px solid rgba(0,255,255,0.18); backdrop-filter: blur(14px);">
+                        <div class="project-title" style="color:#00ffff; font-size:1.15rem; margin-bottom:0.7rem;">SMART INDIA HACKATHON</div>
+                        <div class="project-description" style="color:#fff;">2023–2024: Shortlisted at College Level in both 2023, 2024</div>
+                    </div>
+                </div>
+            </div>
+            <!-- Internships -->
+            <div style="flex: 1 1 340px; min-width: 300px; max-width: 500px;">
+                <h2 class="section-title" style="font-size:2rem; margin-bottom:1.2rem;">Internships</h2>
+                <div class="projects-grid" style="gap: 1.5rem;">
+                    <div class="project-card" style="background: rgba(20,30,50,0.45); border-radius: 1.2rem; box-shadow: 0 4px 32px #00ffff33, 0 1.5px 24px #8a2be233; border: 1.5px solid rgba(0,255,255,0.18); backdrop-filter: blur(14px);">
+                        <div class="project-title" style="color:#00ffff; font-size:1.15rem; margin-bottom:0.7rem;">PRODIGY INFOTECH</div>
+                        <div class="project-description" style="color:#fff;">6/2024–7/2024: Web Development</div>
+                    </div>
+                    <div class="project-card" style="background: rgba(20,30,50,0.45); border-radius: 1.2rem; box-shadow: 0 4px 32px #00ffff33, 0 1.5px 24px #8a2be233; border: 1.5px solid rgba(0,255,255,0.18); backdrop-filter: blur(14px);">
+                        <div class="project-title" style="color:#00ffff; font-size:1.15rem; margin-bottom:0.7rem;">CODSOFT</div>
+                        <div class="project-description" style="color:#fff;">11/2023–12/2023: UI/UX Design</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section class="section" id="projects">
+        <h2 class="section-title">Publications & Projects</h2>
+        <div class="projects-grid">
+            <div class="project-card">
+                <div class="project-icon">🔋</div>
+                <h3 class="project-title">Solar-Powered Wireless Dynamic Charging System for Electric Vehicles</h3>
+                <p class="project-description">Published a Journal in IJMRSET | ISSN:2582-7219 | Volume 7 Issue:11. This research proposes a solar-powered wireless charging system for EVs, enabling charging in motion via embedded road coils and solar energy. It enhances mobility and sustainability, reducing dependence on traditional power sources.</p>
+            </div>
+            <div class="project-card">
+                <div class="project-icon">🤖</div>
+                <h3 class="project-title">JARVIS Robotic Car</h3>
+                <p class="project-description">The project emphasizes the Arduino Controller Car with the MIT App, enhancing autonomous driving capabilities for practical applications.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section class="section" id="skills">
+        <h2 class="section-title">Skills</h2>
+        <div class="skills-container">
+            <div class="skill-category">
+                <h3>Back End</h3>
+                <div class="skills-grid">
+                    <div class="skill-item"><div class="skill-icon">☕</div><div>JAVA, C</div></div>
+                </div>
+            </div>
+            <div class="skill-category">
+                <h3>Front End</h3>
+                <div class="skills-grid">
+                    <div class="skill-item"><div class="skill-icon">🌐</div><div>HTML, CSS, JavaScript</div></div>
+                </div>
+            </div>
+            <div class="skill-category">
+                <h3>DBMS</h3>
+                <div class="skills-grid">
+                    <div class="skill-item"><div class="skill-icon">🗄️</div><div>SQL</div></div>
+                </div>
+            </div>
+            <div class="skill-category">
+                <h3>DevOps</h3>
+                <div class="skills-grid">
+                    <div class="skill-item"><div class="skill-icon">🐙</div><div>GITHUB</div></div>
+                    <div class="skill-item"><div class="skill-icon">☁️</div><div>AWS, GCP</div></div>
+                </div>
+            </div>
+            <div class="skill-category">
+                <h3>Misc. Soft Skills</h3>
+                <div class="skills-grid">
+                    <div class="skill-item"><div class="skill-icon">💡</div><div>Resilience, Communication, Optimistic, Creativity</div></div>
+                </div>
+            </div>
+            <div class="skill-category">
+                <h3>Area of Interest</h3>
+                <div class="skills-grid">
+                    <div class="skill-item"><div class="skill-icon">☁️</div><div>Cloud Computing</div></div>
+                </div>
+            </div>
+            <div class="skill-category">
+                <h3>Languages</h3>
+                <div class="skills-grid">
+                    <div class="skill-item"><div class="skill-icon">English</div><div>(Full Professional Proficiency)</div></div>
+                    <div class="skill-item"><div class="skill-icon">Tamil</div><div> (Professional Working Proficiency)</div></div>
+                    <div class="skill-item"><div class="skill-icon">Hindi</div><div>(Professional Working Proficiency)</div></div>
+                    <div class="skill-item"><div class="skill-icon">Telugu</div><div>(Limited Working Proficiency)</div></div>
+                </div>
+            </div>
+            <div class="skill-category">
+                <h3>Interests</h3>
+                <div class="skills-grid">
+                    <div class="skill-item"><div class="skill-icon">🐾</div><div>Animal Enthusiast</div></div>
+                    <div class="skill-item"><div class="skill-icon">💬</div><div>Prompting</div></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Resume Section -->
+    
+
+    <!-- Contact Section -->
+    <section class="section" id="contact">
+        <h2 class="section-title">Contact</h2>
+        <div class="contact-container" style="max-width: 500px; margin: 0 auto; text-align: center; font-size: 1.15rem; line-height: 2; background: rgba(20,30,50,0.45); border-radius: 1.2rem; padding: 2rem 1.5rem; box-shadow: 0 4px 32px #00ffff33, 0 1.5px 24px #8a2be233; border: 1.5px solid rgba(0,255,255,0.18); backdrop-filter: blur(14px);">
+            <div class="contact-item" style="margin-bottom: 1.2rem;">
+                <span style="font-size: 1.5rem; color: #00ffff; margin-right: 0.5rem;">📧</span>
+                <a href="mailto:ashwiniprasad100704@gmail.com" style="color: #fff; font-size: 1.1rem; text-decoration: underline;">ashwiniprasad100704@gmail.com</a>
+            </div>
+            <div class="contact-item" style="margin-bottom: 1.2rem;">
+                <span style="font-size: 1.5rem; color: #00ffff; margin-right: 0.5rem;">📞</span>
+                <a  style="color: #fff; font-size: 1.1rem; ">9344182161</a>
+            </div>
+            <div class="contact-item">
+                <span style="font-size: 1.5rem; color: #00ffff; margin-right: 0.5rem;">💼</span>
+                <a href="https://www.linkedin.com/in/ashwiniprasad10/" target="_blank" style="color: #00ffff; font-size: 1.1rem; text-decoration: underline;">@ashwiniprasad10</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Modal -->
+    <div class="modal" id="projectModal">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeModal()">&times;</button>
+            <div id="modalContent"></div>
+        </div>
+    </div>
+
+    <script>
+    // Stardust generator for space theme
+    const stardust = document.getElementById('stardust');
+    if (stardust) {
+      for (let i = 0; i < 120; i++) {
+        const dot = document.createElement('div');
+        dot.className = 'stardust-dot';
+        dot.style.left = Math.random() * 100 + 'vw';
+        dot.style.top = (Math.random() * 100 - 10) + 'vh';
+        dot.style.animationDelay = (Math.random() * 8) + 's';
+        dot.style.opacity = 0.5 + Math.random() * 0.5;
+        stardust.appendChild(dot);
+      }
+    }
+    </script>
+
